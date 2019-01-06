@@ -58,7 +58,7 @@ ECHO Reconnecting network interface...
 REM for Wlan
 REM netsh wlan connect ssid="%netSSID%" Name="%netName%" Interface="%netInterface%"
 REM for Lan
-netsh interface set interface "%netInterface%" disable
+netsh interface set interface "%netInterface%" enable
 IF %writeToLog%==1 (
 	ECHO Ping to %server% failed at %lastFail% >> NetworkLog.txt
 	ECHO Previous successful repetitions: %successfulRepetitions% >> NetworkLog.txt
