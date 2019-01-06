@@ -16,7 +16,7 @@ REM Ethernet is the window default name
 REM Pause time between each network check (seconds)
 SET successfulTimeout=30
 REM Pause time after reconnection before next check (seconds)
-SET failedTimeout=45
+SET failedTimeout=120
 REM Write failed network connections to log (Boolean)
 SET writeToLog=1
 
