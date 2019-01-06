@@ -9,11 +9,13 @@ SET packetSize=1
 REM Network info
 SET netSSID=[SSID]
 SET netName=[Network Name]
-SET netInterface=[Network Interface]
+SET netInterface=Ethernet
+REM SET netInterface=[Interface Name]
+REM Ethernet is the window default name
 REM Pause time between each network check (seconds)
 SET successfulTimeout=30
 REM Pause time after reconnection before next check (seconds)
-SET failedTimeout=30
+SET failedTimeout=45
 REM Write failed network connections to log (Boolean)
 SET writeToLog=1
 
@@ -46,12 +48,16 @@ color 0C
 SET lastFail=%time:~-11,2%:%time:~-8,2%:%time:~-5,2% - %date%
 ECHO Ping failed!
 ECHO Disconnecting network interface...
-REM netsh lan disconnect interface="%netInterface%"
-ipconfig /release
+REM for Wlan
+REM netsh wlan disconnect interface="%netInterface%"
+REM for Lan
+netsh interface set interface "%netInterface%" disable
 TIMEOUT 20 >NUL
 ECHO Reconnecting network interface...
-REM netsh lan connect ssid="%netSSID%" Name="%netName%" Interface="%netInterface%"
-ipconfig /renew
+REM for Wlan
+REM netsh wlan connect ssid="%netSSID%" Name="%netName%" Interface="%netInterface%"
+REM for Lan
+netsh interface set interface "%netInterface%" disable
 IF %writeToLog%==1 (
 	ECHO Ping to %server% failed at %lastFail% >> NetworkLog.txt
 	ECHO Previous successful repetitions: %successfulRepetitions% >> NetworkLog.txt
