@@ -11,6 +11,7 @@ SET netSSID=[SSID]
 SET netName=[Network Name]
 SET netInterface=Ethernet
 REM SET netInterface=[Interface Name]
+REM netsh interface show interface
 REM Ethernet is the window default name
 REM Pause time between each network check (seconds)
 SET successfulTimeout=30
